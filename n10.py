@@ -66,7 +66,7 @@ class N10:
                 s = _data[i * 6 + 7]
                 z = _data[i * 6 + 8]
                 y = _data[i * 6 + 9]
-                final_data.append((round(start_angle + i * diff) % 360, (s * 256 + z)))
+                final_data.append((round(start_angle + i * diff) % 360, (s * 256 + z), y))
 
             update(final_data)
 
@@ -111,4 +111,4 @@ class N10:
 
 if __name__ == '__main__':
     n10 = N10('/dev/ttyUSB0')
-    n10.scan(lambda x:[print(i[0], i[1]) for i in x])
+    n10.scan(lambda x:[print(i[0], i[1], i[2]) for i in x])
