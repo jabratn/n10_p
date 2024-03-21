@@ -1,10 +1,9 @@
 from n10 import N10
-from threading import Thread
 import matplotlib.pyplot as plt
 from matplotlib.patches import Circle
 from math import cos, sin, radians
 
-n10 = N10('COM7') # Change to your N10 port
+n10 = N10('/dev/ttyUSB0') # Change to your N10 port
 fig, ax = plt.subplots()
 x, y = [0]*360, [0]*360
 sc = ax.scatter(x, y)
@@ -19,8 +18,8 @@ def update(data):
     bbox = ax.get_window_extent().transformed(fig.dpi_scale_trans.inverted())
     width, height = bbox.width*fig.dpi, bbox.height*fig.dpi
     r = width/height
-    dmax = max(max(x), max(y))*1.1
-    dmin = min(min(x), min(y))*1.1
+    dmax = max(*x, *y)*1.1
+    dmin = min(*x, *y)*1.1
     ax.add_artist(Circle((0, 0), dmax*0.01 , fc='red'))
     ax.set_xlim(dmin*r, dmax*r)
     ax.set_ylim(dmin, dmax)
